@@ -12,6 +12,8 @@ tasks:
     deps:
       - clean
     cmds:
+      - git submodule init
+      - git submodule update
       - "{{.PYTHON}} -m venv {{.VENV_DIR}}"
       - "{{.PYTHON_VENV}} -m pip install -r requirements.txt"
       - npm install
@@ -29,6 +31,7 @@ tasks:
     cmds:
       - git clean -fdx {{.VENV_DIR}}
       - git clean -fdx node_modules
+      - cd whisper.cpp && git clean -fdx whisper.cpp
 
   # linter, formatter
   lint:
@@ -44,6 +47,36 @@ tasks:
       - "{{.PYTHON}} -m ruff format ."
       - npx prettier --write "**/*.md"
       - npx prettier --write "**/*.{yml,yaml}"
+
+  build:
+    desc: Build tools.
+    cmds:
+      - task: build-whisper
+      - task: build-whisper-mac
+  build-whisper:
+    internal: true
+    desc: Build whisper.cpp.
+    dir: whisper.cpp
+    platforms: ["linux", "windows"]
+    cmds:
+      - make large-v3
+      - make clean
+      - make -j
+  build-whisper-mac:
+    internal: true
+    desc: Build whisper.cpp for CoreML.
+    platforms: ["darwin"]
+    dir: whisper.cpp
+    cmds:
+      - make clean
+      - |
+        {{.PYTHON}} -m venv .venv
+        source .venv/bin/activate
+        .venv/bin/python -m pip install -r ./models/requirements-coreml.txt
+        make clean
+        make large-v3
+        ./models/generate-coreml-model.sh large-v3
+        WHISPER_COREML=1 make -j
 
   # requirements.txtの更新用タスク
   # 実行後に下記の修正を手動で実施する必要がある。

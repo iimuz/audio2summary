@@ -4,6 +4,7 @@
   "words": [
     "autodocstring",
     "cmds",
+    "coreml",
     "docstring",
     "dotenv",
     "iimuz",
@@ -14,7 +15,6 @@
     "pytest",
     "setuptools",
     "Taskfile",
-    "VENV",
     "venv",
     "worktree"
   ],

@@ -21,10 +21,10 @@
 仮想環境などの構築は下記のコマンドで実行します。
 
 ```sh
-# 実行だけできればよい場合
+# スクリプト実行などのための仮想環境などを作成
 task init
-# 開発環境もインストールする場合
-task init-dev
+# whisper.cpp, llama.cppのビルド
+task build
 ```
 
 ## Taskfile
@@ -33,18 +33,6 @@ task init-dev
 
 ```sh
 task -l
-```
-
-## whisper.cpp環境の構築
-
-whisper.cppの環境はあらかじめ作成されていることを想定している。
-基本的には、本リポジトリ直下にwhisper.cppリポジトリをクローンして、バイナリをmakeしていることを想定している。
-whisper.cppの環境構築については、[iimuz/whisper-cpp-sample](https://github.com/iimuz/whisper-cpp-sample)で行なった方法を利用している。
-
-```sh
-git clone https://github.com/ggerganov/whisper.cpp.git
-cd whisper.cpp
-# whisper.cppの環境構築
 ```
 
 ## code style
