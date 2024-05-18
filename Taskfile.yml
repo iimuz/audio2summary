@@ -53,6 +53,10 @@ tasks:
     cmds:
       - task: build-whisper
       - task: build-whisper-mac
+  build-pyannote:
+    desc: Download pyannote models.
+    cmds:
+      - python src/pyannote_download_model.py
   build-whisper:
     internal: true
     desc: Build whisper.cpp.
