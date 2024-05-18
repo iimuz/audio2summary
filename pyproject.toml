@@ -9,6 +9,7 @@ urls = {repository = "https://github.com/iimuz/audio2summary"}
 version = "1.0.0"
 
 dependencies = [
+  "huggingface_hub",
   "onnxruntime",  # pyannote.audioでemmbedingモデルによっては必要になる
   "pyannote.audio",
   "pydantic",

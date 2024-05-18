@@ -52,7 +52,7 @@ networkx==3.3
 numba==0.59.1
 numpy==1.26.4
 omegaconf==2.3.0
-onnxruntime==1.17.3
+onnxruntime==1.18.0
 optuna==3.6.1
 packaging==24.0
 pandas==2.2.2
