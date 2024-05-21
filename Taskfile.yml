@@ -48,9 +48,11 @@ tasks:
       - npx prettier --write "**/*.md"
       - npx prettier --write "**/*.{yml,yaml}"
 
+  # buld tools
   build:
     desc: Build tools.
     cmds:
+      - task: build-pyannote
       - task: build-whisper
       - task: build-whisper-mac
   build-pyannote:
@@ -81,6 +83,15 @@ tasks:
         make large-v3
         ./models/generate-coreml-model.sh large-v3
         WHISPER_COREML=1 make -j
+
+  run:
+    desc: Convert speech to summary.
+    cmds:
+      - python src/speech_to_summary.py --device={{.DEVICE}} {{.VERBOSITY}} {{.FILE}}
+    vars:
+      DEVICE: '{{default "cpu" .DEVICE}}'
+      VERBOSITY: '{{default "-v" .VERBOSITY}}'
+      FILE: '{{default "" .FILE}}'
 
   # requirements.txtの更新用タスク
   # 実行後に下記の修正を手動で実施する必要がある。
