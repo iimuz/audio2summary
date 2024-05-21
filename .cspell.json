@@ -7,18 +7,25 @@
     "coreml",
     "docstring",
     "dotenv",
+    "ggml",
     "hbredin",
     "huggingface",
     "levelname",
     "iimuz",
+    "itertracks",
     "mypy",
     "numpy",
+    "onnxruntime",
     "pyannote",
     "pycache",
+    "pydantic",
+    "pydub",
     "pyproject",
     "pytest",
     "setuptools",
     "Taskfile",
+    "unfixable",
+    "wavfile",
     "venv",
     "wespeaker-voxceleb-resnet34-LM",
     "worktree"
@@ -33,6 +40,8 @@
     "**/*.egg-info/**",
     "**/node_modules/**",
     "**/package-lock.json",
-    "**/requirements.txt"
+    "**/requirements.txt",
+    "data/",
+    "whisper.cpp/"
   ]
 }

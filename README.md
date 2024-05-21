@@ -40,7 +40,7 @@ task -l
 コードの整形などはは下記を利用しています。
 
 - json, markdown, toml, yaml
-  - [dprint](https://github.com/dprint/dprint): formatter
+  - [prettier](https://prettier.io/): formatter
 - python
   - [ruff](https://github.com/astral-sh/ruff): python linter and formatter.
   - [mypy](https://github.com/python/mypy): static typing.

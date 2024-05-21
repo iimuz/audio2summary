@@ -10,7 +10,7 @@ version = "1.0.0"
 
 dependencies = [
   "huggingface_hub",
-  "onnxruntime",  # pyannote.audioでemmbedingモデルによっては必要になる
+  "onnxruntime",  # pyannote.audioでembeddingモデルによっては必要になる
   "pyannote.audio",
   "pydantic",
   "pydub",
@@ -38,6 +38,7 @@ line-length = 88
 extend-exclude = [
   ".vscode",
   "data",
+  "whisper.cpp",
 ]
 
 [tool.ruff.lint]
