@@ -40,6 +40,8 @@ class _RunConfig(BaseModel):
     filepath: Path  # 処理対象の音源
     device: str  # デバイス
 
+    save_mp4: bool  # Trueの場合は、mp4以外の形式の場合にmp4に変換して保存する
+
     force: bool  # 保存済みのファイルを無視して実行するかどうか
     verbose: int  # ログレベル
 
@@ -132,6 +134,9 @@ def _main() -> None:
     processed_dir.mkdir(exist_ok=True)
     model_config_filepath = raw_dir / "config.yaml"
 
+    if config.save_mp4 and config.filepath.suffix == ".mp4":
+        pass
+
     # wavファイルへの変更
     _logger.info("convert to wav file: %s", config.filepath.name)
     target_filepath = _convert_to_wav_file(config.filepath, interim_dir)
@@ -166,16 +171,22 @@ def _main() -> None:
 def _parse_args() -> _RunConfig:
     """スクリプト実行のための引数を読み込む."""
     parser = ArgumentParser(
-        description="pyannote-audio v3を利用して話者分離を実施する."
+        description="音声ファイルから文字起こしを行い、要約を作成する."
     )
 
-    parser.add_argument("filepath", help="文字起こしする音源のファイルパス.")
+    parser.add_argument("filepath", help="要約を作成する音源のファイルパス.")
     parser.add_argument(
         "-d",
         "--device",
         default=_DeviceType.CPU.value,
         choices=[v.value for v in _DeviceType],
         help="話者分離に利用するデバイス.",
+    )
+
+    parser.add_argument(
+        "--save-mp4",
+        action="store_true",
+        help="mp4以外のファイルの場合にmp4に変換したファイルを保存する.",
     )
 
     parser.add_argument(
